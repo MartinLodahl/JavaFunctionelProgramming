@@ -1,22 +1,22 @@
 package martin.lodahl.stackthingy;
 
-public class NumberPath<Long> implements Path<Long>{
+public class NumberPath<Integer> implements Path<Integer>{
 
-    private Long first;
-    private NumberPath<Long> rest;
+    private Integer first;
+    private NumberPath<Integer> rest;
 
-    public NumberPath(Long first, NumberPath rest){
+    public NumberPath(Integer first, NumberPath rest){
         this.first = first;
         this.rest = rest;
     }
     
     @Override
-    public Long getFirst() {
+    public Integer getFirst() {
         return first;
     }
 
     @Override
-    public Path<Long> getRest() {
+    public Path<Integer> getRest() {
         return rest;
     }
 
@@ -28,6 +28,17 @@ public class NumberPath<Long> implements Path<Long>{
         }
         String s = first+rest.toString();
         return s;
+    }
+    
+    public Integer[] peekAll(Integer[] list, int i){
+        list[i] = first;
+        if(rest == null){    
+            return list;
+        }else{
+            i++;
+            rest.peekAll(list, i);
+        }
+        return list;
     }
     
 }
