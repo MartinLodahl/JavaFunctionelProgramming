@@ -1,7 +1,6 @@
 package martin.lodahl.stackthingy;
 
 import java.util.Scanner;
-import static javafx.scene.input.KeyCode.T;
 import jdk.nashorn.internal.runtime.ParserException;
 
 public class psvm {
@@ -74,9 +73,8 @@ public class psvm {
     }
 
     private static void printNodes(NumberPath<Integer> np) {
+        if (np ==  null) {return;}
         System.out.println(np.getFirst());
-        if (np.getRest() != null) {
-            printNodes((NumberPath<Integer>) np.getRest());
-        }
+        printNodes((NumberPath<Integer>) np.getRest());
     }
 }
