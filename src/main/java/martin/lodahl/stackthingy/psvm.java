@@ -1,9 +1,7 @@
 package martin.lodahl.stackthingy;
 
-import java.rmi.server.Operation;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
+import static javafx.scene.input.KeyCode.T;
 import jdk.nashorn.internal.runtime.ParserException;
 
 public class psvm {
@@ -30,7 +28,6 @@ public class psvm {
         }
         System.out.println(np.toString());
     }*/
-
     public static void main(String[] args) throws ParserException {
         Scanner in = new Scanner(System.in);
         boolean isAction;
@@ -44,21 +41,42 @@ public class psvm {
             for (int i = 0; i < rawArguments.length; i++) {
                 String rawArgument = rawArguments[i];
                 isAction = false;
-                switch(rawArgument){
-                    case "/":sp.push(sp.pop()/sp.pop()); isAction = true; break;
-                    case "*":sp.push(sp.pop()*sp.pop()); isAction = true; break;
-                    case "+":sp.push(sp.pop()+sp.pop()); isAction = true; break;
-                    case "-":sp.push(sp.pop()-sp.pop()); isAction = true; break;
+                switch (rawArgument) {
+                    case "/":
+                        sp.push(sp.pop() / sp.pop());
+                        isAction = true;
+                        break;
+                    case "*":
+                        sp.push(sp.pop() * sp.pop());
+                        isAction = true;
+                        break;
+                    case "+":
+                        sp.push(sp.pop() + sp.pop());
+                        isAction = true;
+                        break;
+                    case "-":
+                        sp.push(sp.pop() - sp.pop());
+                        isAction = true;
+                        break;
                 }
-                if(!isAction){
+                if (!isAction) {
                     Integer j = Integer.parseInt(rawArgument);
                     sp.push(j);
                 }
             }
-            Integer[] numbersToWrite = sp.peekAll();
+            /*Integer[] numbersToWrite = sp.peekAll();
             for (int i = 0; i < numbersToWrite.length; i++) {
                 System.out.println(numbersToWrite[i]);
-            } 
+            } */
+            NumberPath<Integer> np = sp.peekOne();
+            printNodes(np); 
+        }
+    }
+
+    private static void printNodes(NumberPath<Integer> np) {
+        System.out.println(np.getFirst());
+        if (np.getRest() != null) {
+            printNodes((NumberPath<Integer>) np.getRest());
         }
     }
 }

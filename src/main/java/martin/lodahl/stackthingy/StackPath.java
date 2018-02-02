@@ -28,4 +28,8 @@ public class StackPath {
             return data.peekAll(list, 0);
         }
     }
+    
+    public NumberPath<Integer> peekOne(){
+        return data;
+    }
 }
