@@ -16,7 +16,7 @@ public class NumberPath<Integer> implements Path<Integer>{
     }
 
     @Override
-    public Path<Integer> getRest() {
+    public NumberPath<Integer> getRest() {
         return rest;
     }
 

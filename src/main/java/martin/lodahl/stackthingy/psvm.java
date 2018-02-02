@@ -75,6 +75,6 @@ public class psvm {
     private static void printNodes(NumberPath<Integer> np) {
         if (np ==  null) {return;}
         System.out.println(np.getFirst());
-        printNodes((NumberPath<Integer>) np.getRest());
+        printNodes(np.getRest());
     }
 }
