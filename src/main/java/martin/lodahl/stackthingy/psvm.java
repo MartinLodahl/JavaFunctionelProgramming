@@ -29,7 +29,7 @@ public class psvm {
     }*/
     public static void main(String[] args) throws ParserException {
         Scanner in = new Scanner(System.in);
-        boolean isAction;
+        //boolean isAction;
         StackPath sp = new StackPath();
         while (true) {
             String consoleInput = in.nextLine();
@@ -37,7 +37,8 @@ public class psvm {
                 break;
             }
             String[] rawArguments = consoleInput.split(" ");
-            for (int i = 0; i < rawArguments.length; i++) {
+            useCalls(rawArguments, 0, sp);
+            /*for (int i = 0; i < rawArguments.length; i++) {
                 String rawArgument = rawArguments[i];
                 isAction = false;
                 switch (rawArgument) {
@@ -62,7 +63,7 @@ public class psvm {
                     Integer j = Integer.parseInt(rawArgument);
                     sp.push(j);
                 }
-            }
+            }*/
             /*Integer[] numbersToWrite = sp.peekAll();
             for (int i = 0; i < numbersToWrite.length; i++) {
                 System.out.println(numbersToWrite[i]);
@@ -76,5 +77,34 @@ public class psvm {
         if (np ==  null) {return;}
         System.out.println(np.getFirst());
         printNodes(np.getRest());
+    }
+    
+    private static void useCalls(String[] rawArguments, int i, StackPath sp){
+        if(rawArguments.length == i){return;}  
+        String rawArgument = rawArguments[i];
+               boolean isAction = false;
+                switch (rawArgument) {
+                    case "/":
+                        sp.push(sp.pop() / sp.pop());
+                        isAction = true;
+                        break;
+                    case "*":
+                        sp.push(sp.pop() * sp.pop());
+                        isAction = true;
+                        break;
+                    case "+":
+                        sp.push(sp.pop() + sp.pop());
+                        isAction = true;
+                        break;
+                    case "-":
+                        sp.push(sp.pop() - sp.pop());
+                        isAction = true;
+                        break;
+                }
+                if (!isAction) {
+                    Integer j = Integer.parseInt(rawArgument);
+                    sp.push(j);
+                }
+                useCalls(rawArguments, i+1, sp);
     }
 }

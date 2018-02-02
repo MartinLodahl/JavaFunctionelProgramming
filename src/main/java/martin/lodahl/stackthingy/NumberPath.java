@@ -17,7 +17,7 @@ public class NumberPath<Integer> implements Path<Integer>{
 
     @Override
     public NumberPath<Integer> getRest() {
-        return rest;
+       return rest;
     }
 
     
@@ -39,6 +39,5 @@ public class NumberPath<Integer> implements Path<Integer>{
             rest.peekAll(list, i);
         }
         return list;
-    }
-    
+    }    
 }
